@@ -1,37 +1,43 @@
 pipeline {
+    agent any
 
-agent any
+    environment {
+        DOCKER_IMAGE = 'shoeb8174/jenkins-demo'
+        DOCKER_CREDENTIALS_ID = 'my-docker-hub-credentials-id'  // Replace with your Jenkins credentials ID
+    }
 
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git url: 'https://github.com/ansarishoebs/jenkins_demo.git', branch: 'main'
+            }
+        }
 
-	environment {
-		//Define environment variables for Git and DockerHub credentials
-		GIT_REPOSITORY_URL = 'https://github.com/ansarishoebs/jenkins_demo.git'
-		DOCKER_IMAGE_NAME = 'shoeb8174/docker_jenkins_demo'
-		IMAGE_TAG = '1.0' // Make sure to use string for tag
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    dockerImage = docker.build("${DOCKER_IMAGE}")
+                }
+            }
+        }
 
-	}
+        stage('Push to Docker Hub') {
+            steps {
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', "${DOCKER_CREDENTIALS_ID}") {
+                        dockerImage.push('latest')
+                    }
+                }
+            }
+        }
+    }
 
-
-
-stages {
-	stage('Clone Repository') {
-		steps {
-
-		 // Checkout the Git repository
-		script {
-			try {
-				git branch: 'main', url:'https://github.com/ansarishoebs/jenkins_demo.git'
-
-			} catch (Exception e) {
-
-				 echo "Failed to clone repository: ${e.message}"
-					error "Failed to clone repository"
-			}
-
-		}
-
-		}
-
-	}
-}
+    post {
+        success {
+            echo 'Image built and pushed successfully!'
+        }
+        failure {
+            echo 'Build or push failed.'
+        }
+    }
 }

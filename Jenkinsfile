@@ -24,8 +24,9 @@ pipeline {
         stage('Push to Docker Hub') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', "${DOCKER_CREDENTIALS_ID}") {
-                        dockerImage.push('latest')
+                    withCredentials([usernamePassword(credentialsId: 'my-docker-hub-credentials-id',usernameVariable: 'Username',passwordVariable: "Password")]){
+                        sh "echo $Password | docker login -u $Username --password-stdin"
+                        sh "docker push ${DOCKER_IMAGE}:latest"
                     }
                 }
             }

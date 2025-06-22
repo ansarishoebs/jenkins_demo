@@ -26,7 +26,7 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'my-docker-hub-credentials-id',usernameVariable: 'Username',passwordVariable: "Password")]){
                         sh "echo $Password | docker login -u $Username --password-stdin"
-                        sh "docker push ${DOCKER_IMAGE}:latest"
+                        sh "echo 8174 | sudo -S docker push ${DOCKER_IMAGE}:latest"
                     }
                 }
             }

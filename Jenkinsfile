@@ -20,7 +20,7 @@ stages {
 		 // Checkout the Git repository
 		script {
 			try {
-				git branch: 'main', url: GIT_REPOSITORY_URL
+				git branch: 'main', url: https://github.com/ansarishoebs/jenkins_demo.git
 
 			} catch (Exception e) {
 

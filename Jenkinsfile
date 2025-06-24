@@ -31,6 +31,13 @@ pipeline {
                 }
             }
         }
+        stage('run the image'){
+            steps{
+                script{
+                    sh "docker run -dit -p8080:20 shoeb8174/jenkins-demo"
+                }
+            }
+        }
     }
 
     post {

@@ -35,7 +35,7 @@ pipeline {
                 
                 }
             }
-        }
+        
       /*  stage('run the image'){
             steps{
                 script{

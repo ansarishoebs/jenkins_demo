@@ -27,9 +27,12 @@ pipeline {
                   //  withCredentials([usernamePassword(credentialsId: 'my-docker-hub-credentials-id',usernameVariable: 'Username',passwordVariable: "Password")]){
                    //     sh "echo $Password | docker login -u $Username --password-stdin"
                    //     sh "echo 8174 | sudo -S docker push ${DOCKER_IMAGE}:latest"
-                    withCredentials([string(credentialsId: 'my-docker-hub-credentials-id', variable: 'DOCKERHUB_PASS')]) {
-                        sh "echo \$DOCKERHUB_PASS | docker login -u shoeb8174 --password-stdin"
+                   // withCredentials([string(credentialsId: 'my-docker-hub-credentials-id', variable: 'DOCKERHUB_PASS')]) {
+                    //    sh "echo \$DOCKERHUB_PASS | docker login -u shoeb8174 --password-stdin"
+                    withCredentials([usernamePassword(credentialsId: 'my-docker-hub-credentials-id', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                        sh "echo \$PASSWORD | docker login -u \$USERNAME --password-stdin"
                     }
+
                 
                 }
                 

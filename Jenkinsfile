@@ -31,13 +31,13 @@ pipeline {
                 }
             }
         }
-        stage('run the image'){
+      /*  stage('run the image'){
             steps{
                 script{
                     sh "docker run -dit shoeb8174/jenkins-demo"
                 }
             }
-        }
+        } */
     }
 
     post {

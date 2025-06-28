@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'shoeb8174/jenkins-demo1'
+        DOCKER_IMAGE = 'shoeb8174/jenkins-demo2'
         DOCKER_CREDENTIALS_ID = 'my-docker-hub-credentials-id'  // Replace with your Jenkins credentials ID
     }
 
@@ -39,13 +39,13 @@ pipeline {
                 }
             }
         
-      /*  stage('run the image'){
+        stage('run the image'){
             steps{
                 script{
-                    sh "docker run -dit shoeb8174/jenkins-demo"
+                    sh "docker run -dit -p5000:5000 $DOCKER_IMAGE "
                 }
             }
-        } */
+        } 
     }
 
     post {

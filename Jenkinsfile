@@ -42,7 +42,7 @@ pipeline {
         stage('run the image'){
             steps{
                 script{
-                    sh "docker run -dit -p5000:5000 $DOCKER_IMAGE "
+                    sh "echo 8174 | sudo -S docker run -dit -p5000:5000 $DOCKER_IMAGE "
                 }
             }
         } 

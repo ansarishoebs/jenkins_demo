@@ -31,7 +31,7 @@ pipeline {
                     //    sh "echo \$DOCKERHUB_PASS | docker login -u shoeb8174 --password-stdin"
                     withCredentials([usernamePassword(credentialsId: 'my-docker-hub-credentials-id', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         sh "echo \$PASSWORD | docker login -u \$USERNAME --password-stdin"
-                        sh "echo 8174 | sudo -S docker push ${DOCKER_IMAGE}:latest"
+                        sh "echo 8174 | sudo -S docker push $DOCKER_IMAGE:latest"
                     }
 
                 

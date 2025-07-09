@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'shoeb8174/jenkins-demo2'
+        DOCKER_IMAGE = 'shoeb8174/jenkins-demo3'
         DOCKER_CREDENTIALS_ID = 'my-docker-hub-credentials-id'  // Replace with your Jenkins credentials ID
     }
 
